@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Colors!
+CLR_0=( BLK RED GRN ORG BLU PRP CYN LGR );
+CLR_1=( DGR LRD LGN YEL LBL PNK LCN WYT );
+for NO in 0 1; do
+    CT=0; CLR="CLR_${NO}[*]";
+    for COLOR in ${!CLR}; do
+        read "CL_${COLOR}" <<< "$(echo -e "\\033[${NO};3${CT}m")";
+        (( CT++ ));
+    done
+done
+unset CT CLR NO CLR_0 CLR_1 COLOR; # To be safe
+NONE="\033[0m";
+
+# Flags
+export INF="${CL_LBL}[!]${NONE}" SCS="${CL_LGN}[!]${NONE}" \
+	FLD="${CL_LRD}[!]${NONE}" EXE="${CL_YEL}[!]${NONE}" \
+	QN="${CL_LRD}[?]${NONE}";
+
+# 'read' command with custom prompt '[>]' in Cyan
+function prompt(){ read -p $'\033[1;36m[>]\033[0m ' "$1"; };
+
+# 'sudo' command with custom prompt '[#]' in Pink
+function sudo(){ command sudo -p $'\033[1;35m[#]\033[0m ' "$@"; };
+
+# Subscripts
+source *.rc;

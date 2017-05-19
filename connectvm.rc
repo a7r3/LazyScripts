@@ -1,0 +1,35 @@
+# Name of the Instance
+INSTANCE="lazybox";
+
+# Zone in which Instance is located (eg. us-central1-f)
+ZONE="Enter-the-Zone";
+
+# Location of SSH key - This SSH key has to be added in Google Cloud Console
+SSHKEY="/home/locate/.the/ssh-key";
+
+# SSH Username - Default value > whoami ?
+UNAME="derpboi";
+
+function connectvm()
+{
+	echo -e "\n${EXE} Attempting to start Instance ${CL_WYT}${INSTANCE}${NONE} on Zone ${CL_WYT}${ZONE}${NONE}";
+	if gcloud compute instances start "${INSTANCE}" --zone="${ZONE}" &> start.log; then
+		echo -e "\n${SCS} Instance ${CL_WYT}${INSTANCE}${NONE} started successfully";
+		echo -e "\n${EXE} Connecting to Instance ${INSTANCE} via SSH\n";
+		# Get the External IP Address
+		EXIP=$(gcloud compute instances list | grep "${INSTANCE}" | awk '{print $((NF-1))}');
+		# Lets get connected
+		ssh -i "${SSHKEY}" "${UNAME:-$(whoami)}"@"${EXIP}";
+		# Coz Lazy to shutdown the Virtual Machine
+		# Credit Saver :'(
+		echo -e "\n${EXE} Attempting to stop Instance ${CL_WYT}${INSTANCE}${NONE}\n";
+		if gcloud compute instances stop "${INSTANCE} &> stop.log"; then
+			echo -e "\n${SCS} Instance ${CL_WYT}${INSTANCE}${NONE} stopped successfully";
+		else
+			echo -e "\n${FLD} An Error occured while trying to stop the Instance";
+		fi
+	else
+		echo -e "\n${FLD} An Error occured while trying to start the instance";
+		echo -e "\n${INF} Please try again later";
+	fi
+} # connectvm

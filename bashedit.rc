@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function bashedit()
+{
+	echo -e "\n${EXE} Opening .bashrc\n";
+	sleep 1;
+	nano ~/.bashrc;
+        echo -e "${EXE} Re-initiating Session\n`sleep 2`";
+        bash;
+} # bashedit
