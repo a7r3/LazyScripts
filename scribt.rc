@@ -3,21 +3,21 @@
 
 function scribt()
 {
-	if [[ "$1" == "get" ]]; then
-		echo -e "\n${INF} Branch : $2\n\n${INF} Destination : $3\n";
-		git clone https://github.com/ScriBt/ScriBt -b $2 $3;
-		cd "$3";
-		echo "$3" >> ~/.scribtrc;
-	elif [[ "$1" == "find" ]]; then
-		CT=1;
-		while read line; do
-			echo -e "${CT}. $line";
-			LOCS=( "${LOCS}" "$line" );
-		done <<< "$(cat ~/.scribtrc)";
-		echo -e "${CL_WYT} These are the locations\nSelect one\n";
-		prompt LOC;
-		cd $(eval echo "\${LOCS[$(( LOC + 1 ))]}");
-	else
-		echo -e "Usage: $0 get <branch> <clonedir>\n\t$0 find";
-	fi
+    if [[ "$1" == "get" ]]; then
+        echo -e "\n${INF} Branch : $2\n\n${INF} Destination : $3\n";
+        git clone https://github.com/ScriBt/ScriBt -b $2 $3;
+        cd "$3";
+        echo "$3" >> ~/.scribtrc;
+    elif [[ "$1" == "find" ]]; then
+        CT=1;
+        while read line; do
+            echo -e "${CT}. $line";
+            LOCS=( "${LOCS}" "$line" );
+        done <<< "$(cat ~/.scribtrc)";
+        echo -e "${CL_WYT} These are the locations\nSelect one\n";
+        prompt LOC;
+        cd $(eval echo "\${LOCS[$(( LOC + 1 ))]}");
+    else
+        echo -e "Usage: $0 get <branch> <clonedir>\n\t$0 find - To find ScriBt directories";
+    fi
 } # scribt

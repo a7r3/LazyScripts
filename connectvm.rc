@@ -10,11 +10,6 @@ SSHKEY="/home/locate/.the/ssh-key";
 # SSH Username - Default value > whoami ?
 UNAME="derpboi";
 
-# Install gcloud tool
-if ! which gcloud; then
-    curl https://sdk.cloud.google.com | bash
-fi
-
 function connectvm()
 {
     echo -e "\n${EXE} Attempting to start Instance ${CL_WYT}${INSTANCE}${NONE} on Zone ${CL_WYT}${ZONE}${NONE}";

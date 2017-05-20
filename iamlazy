@@ -25,4 +25,6 @@ function prompt(){ read -p $'\033[1;36m[>]\033[0m ' "$1"; };
 function sudo(){ command sudo -p $'\033[1;35m[#]\033[0m ' "$@"; };
 
 # Subscripts
-source *.rc;
+source bashedit.rc;
+source connectvm.rc;
+source scribt.rc;
