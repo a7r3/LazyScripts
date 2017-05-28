@@ -13,6 +13,7 @@ function scribt()
         while read line; do
             echo -e "${CT}. $line";
             LOCS=( "${LOCS}" "$line" );
+            (( CT++ ));
         done <<< "$(cat ~/.scribtrc)";
         echo -e "${CL_WYT} These are the locations\nSelect one\n";
         prompt LOC;
