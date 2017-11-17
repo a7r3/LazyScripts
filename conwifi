@@ -1,0 +1,37 @@
+INTERFACE=${1:-wlp1s0}
+
+echo -e "\nFiring up Wi-Fi Interface ${INTERFACE}\n"
+
+ip link set ${INTERFACE} up
+
+echo -e "\033[1mScanning for Networks\033[0m"
+
+AVAILABLE_NETWORKS=( $(iwlist ${INTERFACE} scanning | grep ESSID | awk -F "\"" '{print $2}') );
+
+echo -e "\033[1mAvailable Networks\033[0m\n";
+
+for (( i = 0; i < ${#AVAILABLE_NETWORKS[*]}; i++ )) {
+	echo -e "$((i+1)). ${AVAILABLE_NETWORKS[i]}";
+}
+
+read -rp $'\nChoose a network to get connected : ' SSID;
+
+SSID=$(eval echo \${AVAILABLE_NETWORKS[$(( SSID - 1 ))]});
+
+echo -e "\n\033[1mChosen network : ${SSID}\033[0m";
+
+read -rsp $'\n\033[1mEnter Pass : \033[1m' PASS;
+
+if wpa_supplicant -B -i "${INTERFACE}" -c <(wpa_passphrase "$SSID" "$PASS"); then
+	echo -e "\033[1mCONNECTED\n";
+else
+	echo -e "\033[1mNOT\033[0m CONNECTED\n";
+fi
+
+unset PASS;
+
+echo -e "Assinging Local IP Address";
+
+dhcpcd "${INTERFACE}";
+
+unset SSID INTERFACE AVAILABLE_NETWORKS;

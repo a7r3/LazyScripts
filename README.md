@@ -2,7 +2,9 @@
 <hr>
 <h1 align="center"><b>Gotta automate 'em all!</b></h1>  
 
-<p align="center">Personal scripts to automate every stuff possible</p>  
+<p align="center">Personal scripts to automate every stuff possible (trying to follow the 90 seconds principle)</p>  
+
+<p align="center"><b>Disclaimer : Use it only after you try it yourself, manually</b></p>  
 
 To make use of these scripts, add this line in ~/.bashrc  
 
@@ -10,8 +12,8 @@ To make use of these scripts, add this line in ~/.bashrc
 
 and then run  
 
-```. iamlazy```  
+```source iamlazy```  
 
 That's it  
 
-Uhmm, Good Morning ?  
+Uhmm, Good day ?  
