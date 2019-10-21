@@ -37,11 +37,11 @@ function exitcolor()
 
 # Here's an example prompt, modify it according to your liking!
 if [[ $(id -u) == 0 ]]; then
-        export PS1='$(exitcolor)[i.am.groot.]\033[0m\n\033[1m[\h]\033[1m[\w]$(branch) \[\033[1;35m\]#>\[\033[0m\] ';
+        export PS1='Your Creative Prompt for ROOT user HERE';
 else
-        export PS1='$(exitcolor)[\u@\h]\[\033[0m\033[1m\][\w]$(branch)\n\[\033[1m\] ⤷\[\033[0m\] ';
+        export PS1='Your Creative Prompt for NORMAL user HERE';
 fi
 
 # Secondary Prompt variable PS2 which shows up
 # when a command is continued on the next line
-export PS2='\[\033[1;36m\]>\[\033[0m\] ';
+export PS2='>> ';
