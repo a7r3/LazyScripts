@@ -1,0 +1,3 @@
+function apkdir() {
+        cd app/build/outputs/apk/${1:-debug}
+}
