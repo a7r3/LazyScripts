@@ -28,4 +28,5 @@ function sudo(){ command sudo -p $'\033[1;35m[#]\033[0m ' "$@"; };
 source bashedit.rc;
 source connectvm.rc;
 source scribt.rc;
+source flutter.rc;
 alias conwifi='sudo -i ./conwifi';
